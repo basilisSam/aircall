@@ -1,11 +1,15 @@
-import { Tractor, Spacer, Typography } from "@aircall/tractor";
+import {  Routes, Route } from "react-router-dom";
+import Home from "./componets/Home";
 import Login from "./componets/Login";
 
 function App() {
   return (
-    <Tractor injectStyle>
-      <Login />
-    </Tractor>
+   
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='login' element={<Login />} />
+      </Routes>
+    
   );
 }
 
