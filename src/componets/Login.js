@@ -5,11 +5,24 @@ import {
   Form,
   FormItem,
   Grid,
-  Select,
   TextFieldInput,
 } from "@aircall/tractor";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { loginAction } from "../service/login";
 const Login = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
+
+  const captureUsername = (e) => {
+    setUsername(e.target.value);
+  };
+  const capturePassword = (e) => {
+    setPassword(e.target.value);
+  };
+
   return (
     <Box
       mx='auto'
@@ -26,30 +39,29 @@ const Login = () => {
         }}
       >
         <Grid gridColumnGap={10} gridRowGap={10} gridTemplateColumns='1fr'>
-          <FormItem
-            label='Email'
-            name='email'
-            helpText='Your email should be unique'
-          >
+          <FormItem label='Username' name='username'>
             <TextFieldInput
-              placeholder='john.doe@example.com'
-              defaultValue='jobs@aircall.io'
+              onChange={(e) => captureUsername(e)}
+              placeholder='Please type your username'
             />
           </FormItem>
-          <FormItem
-            label='Password'
-            name='email'
-            helpText='Password is too weak, try again!'
-            validationStatus='error'
-          >
-            <TextFieldInput type='password' defaultValue='ThisIsAPassword!' />
+          <FormItem label='Password' name='password'>
+            <TextFieldInput
+              onChange={(e) => capturePassword(e)}
+              type='password'
+              placeholder='Please type your password'
+            />
           </FormItem>
-
           <FormItem name='remember_me'>
             <Checkbox>Remember me</Checkbox>
           </FormItem>
           <FormItem>
-            <Button block>Login</Button>
+            <Button
+              block
+              onClick={() => loginAction(username, password, navigate)}
+            >
+              Login
+            </Button>
           </FormItem>
         </Grid>
       </Form>
