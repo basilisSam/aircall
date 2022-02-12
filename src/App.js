@@ -1,12 +1,10 @@
 import { Tractor, Spacer, Typography } from "@aircall/tractor";
+import Login from "./componets/Login";
 
 function App() {
   return (
     <Tractor injectStyle>
-      <Spacer space="s">
-        <Typography variant="displayM">Hello</Typography>
-        <Typography variant="displayL">World</Typography>
-      </Spacer>
+      <Login />
     </Tractor>
   );
 }
