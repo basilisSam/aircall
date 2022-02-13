@@ -9,10 +9,12 @@ import {
 } from "@aircall/tractor";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { loginAction } from "../service/login";
+import { login } from "../service/login";
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [usernameError, setUsernameError] = useState("success");
+  const [passwordError, setPasswordError] = useState("success");
 
   const navigate = useNavigate();
 
@@ -22,6 +24,20 @@ const Login = () => {
   const capturePassword = (e) => {
     setPassword(e.target.value);
   };
+
+  const loginSubmit = () => {
+    if(credentialsAreValid()){
+      login(username,password,navigate)
+    }
+  }
+
+  const credentialsAreValid = () =>{
+    if(username!=="" && password!=="")
+      return true;
+
+    username==="" ? setUsernameError("error") : setUsernameError("success")
+    password==="" ? setPasswordError("error") : setPasswordError("success")
+  }
 
   return (
     <Box
@@ -39,16 +55,22 @@ const Login = () => {
         }}
       >
         <Grid gridColumnGap={10} gridRowGap={10} gridTemplateColumns='1fr'>
-          <FormItem label='Username' name='username'>
+          <FormItem label='Username' name='username'
+                    validationStatus={usernameError}
+                    helpText={usernameError ==="error" ? "Username cannot be empty" : ""} >
             <TextFieldInput
               onChange={(e) => captureUsername(e)}
               placeholder='Please type your username'
+              validationStatus={usernameError}
             />
           </FormItem>
-          <FormItem label='Password' name='password'>
+          <FormItem label='Password' name='password'
+                    validationStatus={passwordError}
+                    helpText={passwordError ==="error" ? "Password cannot be empty" : ""}>
             <TextFieldInput
               onChange={(e) => capturePassword(e)}
               type='password'
+              validationStatus={passwordError}
               placeholder='Please type your password'
             />
           </FormItem>
@@ -58,7 +80,7 @@ const Login = () => {
           <FormItem>
             <Button
               block
-              onClick={() => loginAction(username, password, navigate)}
+              onClick={() => loginSubmit()}
             >
               Login
             </Button>

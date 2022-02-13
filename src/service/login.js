@@ -1,6 +1,7 @@
-const loginAction = (username, password, navigate) => {
-  const URL = "https://frontend-test-api.aircall.io/auth/login";
-  fetch(URL, {
+import { LOGIN_URL } from "../constants";
+
+const login = (username, password, navigate) => {
+  fetch(LOGIN_URL, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -20,4 +21,9 @@ const getAuthorization = () => {
   return { Authorization: "Bearer " + sessionStorage.getItem("jwt") };
 };
 
-export { loginAction, getAuthorization };
+const logout = (navigate) => {
+  sessionStorage.clear();
+  navigate("/login");
+};
+
+export { login, logout, getAuthorization };

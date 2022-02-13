@@ -1,12 +1,14 @@
 import Call from "./Call";
+import {Spacer} from "@aircall/tractor";
 
 const Calls = ({ calls }) => {
   return (
-    <>
-      {calls.map((call) => (
-        <Call key={call.id} call={call} />
-      ))}
-    </>
+      <Spacer space="s" direction="vertical" justifyItems="center">
+        {calls.map((call) => (
+            <Call key={call.id} call={call} />
+        ))}
+      </Spacer>
+
   );
 };
 

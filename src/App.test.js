@@ -1,8 +1,18 @@
-import { render, screen } from "@testing-library/react";
-import App from "./App";
+import React from 'react';
+import { cleanup, render } from '@testing-library/react';
+import { afterEach, it } from '@jest/globals';
+import { MemoryRouter } from 'react-router-dom';
+import NavBar from '../src/componets/NavBar';
 
-test("renders learn react link", () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+afterEach(cleanup);
+
+it('should render the navbar', () => {
+  const { getByText } = render(<MemoryRouter><NavBar /></MemoryRouter>);
+  getByText('Aircall');
+});
+
+describe('Addition', () => {
+  it('knows that 2 and 2 make 4', () => {
+    expect(2 + 2).toBe(4);
+  });
 });
