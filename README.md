@@ -1,52 +1,44 @@
-# BulletinBoard [![Netlify Status](https://api.netlify.com/api/v1/badges/e8658376-160e-4dfd-bd49-0c20b60e4a47/deploy-status)](https://app.netlify.com/sites/bulletinboardd/deploys) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/dcf848f155144840a71ed9198b77e16b)](https://www.codacy.com/gh/basilisSam/BulletinBoard/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=basilisSam/BulletinBoard&amp;utm_campaign=Badge_Grade) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/basilisSam/BulletinBoard/wiki/How-to-contribute)
+# Aircall [![Netlify Status](https://api.netlify.com/api/v1/badges/01bf1838-b94e-468f-b331-e5ccb5e60096/deploy-status)](https://app.netlify.com/sites/vasilis-aircall/deploys) [![Known Vulnerabilities](https://snyk.io/test/github/basilisSam/aircall/badge.svg)](https://snyk.io/test/github/basilisSam/aircall) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/fa90ffd43ad240d2bd823156d4b9ddc3)](https://www.codacy.com/gh/basilisSam/aircall/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=basilisSam/aircall&amp;utm_campaign=Badge_Grade)
 
-The front end of the BulletinBoard application. A functional announcement app that you can create/delete/edit announcements to specific category.
+This is a project done for Aircall interview. Please find the instructions [here](https://github.com/basilisSam/aircall/wiki/Project-Instructions)
 
 ## Teck Stack
 
-The project is build with [React](https://reactjs.org/). It uses [Tailwind CSS](https://tailwindcss.com/) for styling and [JSON Server](https://www.npmjs.com/package/json-server) for the backend.
+The project is build with [React](https://reactjs.org/). It uses [jest](https://jestjs.io/) and [testing-library](https://testing-library.com/) for testing. It also uses [Tractor](https://tractor.aircall.io/) for styling.
 
-For continuous integration and continuous deployment it uses [Netlify CI/CD](https://www.netlify.com/) and for the deployment [Netlify](https://www.netlify.com/).
+For continuous integration and continuous deployment it uses [Netlify CI/CD](https://www.netlify.com/). The project has been deployed here: https://vasilis-aircall.netlify.app/
 
 ### Run it locally
 
 1. Clone the project on your local machine. <br/>
-   `$ git clone https://github.com/basilisSam/BulletinBoard.git`
+   `$ git clone https://github.com/basilisSam/aircall.git`
 
 2. Navigate to the project folder and install the dependencies with the following command. <br/>
-   `$ yarn install`
+   `$ npm install`
 
 3. Run the application locally (the application can be accessed from [localhost:3000](http://localhost:3000/)) <br/>
-   `$ yarn dev`
+   `$ npm run start`
 
 ### Available scripts
 
 #### Run app locally
 
-You can run the application locally by using `yarn dev`. This command will spin up the webpack-dev-server and the JSON server by running both commands concurrently.
+You can run the application locally by using `npm run start`.
 
-#### Run react app
+#### Test
 
-You can start the react application by using `yarn start` (you will need the json-server running).
-
-#### Run json-server
-
-You can start the json-server by using `yarn jserver`.
-
-#### Run json-server
-
-You can start the json-server by using `yarn jserver`
+You can run the tests of the application with `npm run test`
 
 #### Build
 
-You can build the application in production mode with `yarn build`
+You can build the application in production mode with `npm run build`
 
-> **Note:** You can use `npm` instead of `yarn`
+> **Note:** You can use `yarn` instead of `npm`
 
-### Documentation
+### Extra features implemented
+- [X] Login validation - when fields are empty
+- [X] Logout fuctionality
+- [X] Add toast when archiving call to give feedback to the user
+- [X] Add a spinner when fetching data to give a better user experience
 
-BulletinBoard documentation is available [here](https://github.com/basilisSam/BulletinBoard/wiki).
 
-### Contributing Guide
-
-Read our contributing guide to learn about our development process, how to propose bugfixes and improvements, and how to build to BulletinBoard.
