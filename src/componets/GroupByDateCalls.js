@@ -2,14 +2,15 @@ import {Typography} from "@aircall/tractor";
 import Calls from "./Calls";
 import PropTypes from "prop-types";
 
-const GroupByDateCalls = ({ groupByDate, archiveCall }) => {
+const GroupByDateCalls = ({ groupByDate, updateCall }) => {
   return (
     <>
       {Object.keys(groupByDate).map((date) => (
         <div key={date}>
         <Typography mb="4px" textAlign="center" variant="heading2">{date} </Typography>
           <Calls
-            archiveCall={archiveCall}
+              enablePagination={false}
+            updateCall={updateCall}
             calls={groupByDate[date]}
           />
         </div>
@@ -26,7 +27,7 @@ GroupByDateCalls.propTypes = {
           id: PropTypes.string
         })),
   }),
-  archiveCall: PropTypes.func.isRequired
+  updateCall: PropTypes.func.isRequired
 }
 
 export default GroupByDateCalls;

@@ -1,15 +1,8 @@
-import {
-    Box,
-    Button,
-    Checkbox,
-    Form,
-    FormItem,
-    Grid,
-    TextFieldInput,
-} from "@aircall/tractor";
+import {Box, Button, Checkbox, Form, FormItem, Grid, TextFieldInput,} from "@aircall/tractor";
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {login} from "../service/login";
+import PropTypes from "prop-types";
 
 const Login = ({setIsLoggedIn}) => {
     const [username, setUsername] = useState("");
@@ -93,5 +86,9 @@ const Login = ({setIsLoggedIn}) => {
         </Box>
     );
 };
+
+Login.propTypes = {
+    setIsLoggedIn: PropTypes.func.isRequired
+}
 
 export default Login;

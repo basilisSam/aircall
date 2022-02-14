@@ -1,6 +1,7 @@
 import {Button, Flex, Spacer, Typography,} from "@aircall/tractor";
 import {Link, useNavigate} from "react-router-dom";
 import {logout} from "../service/login";
+import PropTypes from "prop-types";
 
 const Navbar = ({isLoggedIn,setIsLoggedIn}) => {
   const navigate = useNavigate();
@@ -33,5 +34,10 @@ const Navbar = ({isLoggedIn,setIsLoggedIn}) => {
     </Flex>
   );
 };
+
+Navbar.propTypes = {
+  isLoggedIn: PropTypes.bool,
+  setIsLoggedIn: PropTypes.func.isRequired
+}
 
 export default Navbar;

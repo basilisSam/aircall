@@ -27,11 +27,4 @@ CallNote.propTypes = {
   }),
 };
 
-CallNote.propTypes = {
-  note: PropTypes.shape({
-    content: PropTypes.string,
-    id: PropTypes.string
-  })
-}
-
 export default CallNote;

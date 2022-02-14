@@ -12,7 +12,7 @@ const callsProps = [{id: "someId", from: "123"}, {id: "anotherId", from: "456"}]
 it('should render multiple child components', () => {
     render(<MemoryRouter>
         <Tractor>
-            <Calls calls={callsProps} archiveCall={jest.fn()}/>
+            <Calls calls={callsProps} archiveCall={jest.fn()} updateCall={jest.fn()} enablePagination={false} itemsPerPage={2}/>
         </Tractor>
     </MemoryRouter>);
 

@@ -10,11 +10,6 @@ const CallDetails = () => {
   const { id } = useParams();
   const [callInfo, setCallInfo] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  const [selectedItem, setSelectedItem] = useState(1);
-
-  const handleItemChange = (newSelectedItem) => {
-    setSelectedItem(newSelectedItem);
-  };
 
   useEffect(() => {
     fetch(CALLS_URL + id, {

@@ -7,116 +7,139 @@ import Calls from "./Calls";
 import Sidebar from "./Sidebar";
 import GroupByDateCalls from "./GroupByDateCalls";
 import { toast } from "react-toastify";
-import Pusher from 'pusher-js';
+import Pusher from "pusher-js";
+import {
+  addCallIfArchived,
+  addCallIfNotArchived,
+  generateGroupsByDate,
+} from "../service/calls";
 
 const Home = () => {
-    const pusher = new Pusher("d44e3d910d38a928e0be", {
-        cluster: "eu",
-        authEndpoint: 'https://frontend-test-api.aircall.io/pusher/auth',
-        auth: {
-            headers: { Authorization: "Bearer " + sessionStorage.getItem("jwt") }
+  const pusher = new Pusher("d44e3d910d38a928e0be", {
+    cluster: "eu",
+    authEndpoint: "https://frontend-test-api.aircall.io/pusher/auth",
+    auth: {
+      headers: { Authorization: "Bearer " + sessionStorage.getItem("jwt") },
+    },
+  });
+  const channel = pusher.subscribe("private-aircall");
+  channel.bind("update-call", (archivedCall) => {
+    // setCalls(calls.filter((call) => call.id !== archivedCall.id));
+    // setArchiveCalls([...archiveCalls, archivedCall]);
+  });
+
+  const navigate = useNavigate();
+  const [calls, setCalls] = useState({});
+  const [archiveCalls, setArchiveCalls] = useState({});
+  const [groupByDate, setGroupByDate] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
+  const [groupByDateToggle, setGroupByDateToggle] = useState(false);
+  const [archivedToggle, setArchivedToggle] = useState(false);
+
+  const updateCall = (id) => {
+    fetch(`${CALLS_URL}${id}/archive`, {
+      method: "PUT",
+      headers: getAuthorization(),
+    })
+      .then((r) => r.json())
+      .then((archivedCall) => {
+        setCalls(addCallIfNotArchived(calls, archivedCall));
+        setArchiveCalls(addCallIfArchived(archiveCalls, archivedCall));
+        toast.success("Call has been updated successfully!", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          progress: undefined,
+        });
+      });
+  };
+
+  const groupCallsByDate = () => {
+    setGroupByDateToggle(!groupByDateToggle);
+  };
+
+  const showArchived = () => {
+    setArchivedToggle(!archivedToggle);
+  };
+
+  const updateGroupCallsByDate = () => {
+    if (groupByDateToggle) {
+      const groups = generateGroupsByDate(calls);
+      setGroupByDate(groups);
+    }
+  };
+
+  useEffect(() => {
+    fetch(CALLS_URL, {
+      headers: getAuthorization(),
+    })
+      .then((calls) => {
+        if (calls.ok) {
+          return calls.json();
         }
-    });
-    const channel = pusher.subscribe("private-aircall");
-    channel.bind("update-call", (archivedCall) => {
-        setCalls(calls.filter((call) => call.id !== archivedCall.id));
-        setArchiveCalls([...archiveCalls, archivedCall]);
-    });
+        throw calls;
+      })
 
-    const navigate = useNavigate();
-    const [calls, setCalls] = useState({});
-    const [archiveCalls, setArchiveCalls] = useState({});
-    const [groupByDate, setGroupByDate] = useState({});
-    const [isLoading, setIsLoading] = useState(true);
-    const [groupByDateToggle, setGroupByDateToggle] = useState(false);
-
-    const archiveCall = (id) => {
-        fetch(`${CALLS_URL}${id}/archive`, {
-            method: "PUT",
-            headers: getAuthorization(),
-        })
-            .then((r) => r.json())
-            .then((archivedCall) => {
-                setCalls(calls.filter((call) => call.id !== archivedCall.id));
-                setArchiveCalls([...archiveCalls, archivedCall]);
-                toast.success("Call has been archived successfully!", {
-                    position: "top-right",
-                    autoClose: 3000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    progress: undefined,
-                });
-            });
-    };
-
-    const groupCallsByDate = () => {
-        setGroupByDateToggle(!groupByDateToggle);
-    };
-
-    const updateGroupCallsByDate = () => {
-        if (groupByDateToggle) {
-            const groups = calls.reduce((groups, call) => {
-                const date = call.created_at.split("T")[0];
-                if (!groups[date]) {
-                    groups[date] = [];
-                }
-                groups[date].push(call);
-                return groups;
-            }, {});
-            setGroupByDate(groups);
+      .then((calls) => {
+        setCalls(calls.nodes.filter((call) => call.is_archived === false));
+        setArchiveCalls(
+          calls.nodes.filter((call) => call.is_archived === true)
+        );
+        setIsLoading(false);
+      })
+      .catch((e) => {
+        if (e.status === 401) {
+          navigate("/login");
         }
-    };
+      });
 
-    useEffect(() => {
-        fetch(CALLS_URL, {
-            headers: getAuthorization(),
-        })
-            .then((calls) => {
-                if (calls.ok) {
-                    return calls.json();
-                }
-                throw calls;
-            })
-            .then((calls) => {
-                setCalls(calls.nodes.filter((call) => call.is_archived === false));
-                setArchiveCalls(
-                    calls.nodes.filter((call) => call.is_archived === true)
-                );
-                setIsLoading(false);
-            })
-            .catch((e) => {
-                if (e.status === 401) {
-                    navigate("/login");
-                }
-            });
+    updateGroupCallsByDate();
+  }, [groupByDateToggle]);
 
-        updateGroupCallsByDate();
-    }, [groupByDateToggle]);
+  return (
+    <Grid gridTemplateColumns='max-content auto' gridGap={3}>
+      <Sidebar
+        groupByDateToggle={groupByDateToggle}
+        groupCallsByDate={groupCallsByDate}
+        archivedToggle={archivedToggle}
+        showArchived={showArchived}
+      />
+      <Flex alignItems='center' justifyContent='center' p={3}>
+        {!isLoading ? (
+          <Spacer space='s' direction='vertical' justifyItems='center'>
+            {groupByDateToggle ? (
+              <GroupByDateCalls
+                updateCall={updateCall}
+                groupByDate={groupByDate}
+              />
+            ) : (
+              <Calls
+                enablePagination={true}
+                updateCall={updateCall}
+                calls={calls}
+                itemsPerPage={2}
+              />
+            )}
 
-    return (
-        <Grid gridTemplateColumns='max-content auto' gridGap={3}>
-            <Sidebar
-                groupByDateToggle={groupByDateToggle}
-                groupCallsByDate={groupCallsByDate}
-            />
-            <Flex alignItems='center' justifyContent='center' p={3}>
-                {!isLoading ? (
-                    <Spacer space='s' direction='vertical' justifyItems='center'>
-                        {groupByDateToggle ? (
-                            <GroupByDateCalls
-                                archiveCall={archiveCall}
-                                groupByDate={groupByDate}
-                            />
-                        ) : (
-                            <Calls archiveCall={archiveCall} calls={calls} />
-                        )}
-                    </Spacer>
-                ) : (
-                    <span className='loader' />
-                )}
-            </Flex>
-        </Grid>
-    );
+            {archivedToggle && (
+              <>
+                <h1>Archived</h1>
+                <Calls
+                  enablePagination={false}
+                  updateCall={updateCall}
+                  calls={archiveCalls}
+                  itemsPerPage={2}
+                />
+              </>
+            )}
+          </Spacer>
+        ) : (
+          <span className='loader' />
+        )}
+      </Flex>
+    </Grid>
+  );
 };
 
 export default Home;

@@ -10,7 +10,7 @@ afterEach(cleanup);
 it('should render the brand name in the navbar', () => {
     render(<MemoryRouter>
         <Tractor>
-            <Navbar/>
+            <Navbar isLoggedIn={true} setIsLoggedIn={jest.fn()} />
         </Tractor>
     </MemoryRouter>);
 
@@ -20,7 +20,7 @@ it('should render the brand name in the navbar', () => {
 it('should render the logout button when logged in', () => {
     render(<MemoryRouter>
         <Tractor>
-            <Navbar isLoggedIn={true}/>
+            <Navbar isLoggedIn={true} setIsLoggedIn={jest.fn()} />
         </Tractor>
     </MemoryRouter>);
 
@@ -32,7 +32,7 @@ it('should render the logout button when logged in', () => {
 it('should have no logout button when not loggedIn', () => {
     render(<MemoryRouter>
         <Tractor>
-            <Navbar isLoggedIn={false}/>
+            <Navbar isLoggedIn={false} setIsLoggedIn={jest.fn()} />
         </Tractor>
     </MemoryRouter>);
 

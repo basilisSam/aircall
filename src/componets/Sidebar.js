@@ -1,7 +1,8 @@
-import { Box, Spacer, Toggle, Typography } from "@aircall/tractor";
+import {Box, Spacer, Toggle, Typography} from "@aircall/tractor";
 import PropTypes from "prop-types";
+import GroupByDateCalls from "./GroupByDateCalls";
 
-const Sidebar = ({ groupByDateToggle, groupCallsByDate }) => {
+const Sidebar = ({ groupByDateToggle, groupCallsByDate,showArchivedToggle,showArchived }) => {
   return (
     <Spacer space='s'>
       <Box height='300px' width='200px' bg='grey.light' position='relative'>
@@ -14,9 +15,24 @@ const Sidebar = ({ groupByDateToggle, groupCallsByDate }) => {
             onChange={() => groupCallsByDate()}
           />
         </Spacer>
+          <Spacer space='s' alignItems='center' mt={10} alignContent='center'>
+          <Typography variant='body'>Show archived</Typography>
+          <Toggle
+            size='small'
+            checked={showArchivedToggle}
+            onChange={() => showArchived()}
+          />
+        </Spacer>
       </Box>
     </Spacer>
   );
 };
+
+GroupByDateCalls.propTypes = {
+  groupByDateToggle:PropTypes.bool,
+  groupCallsByDate:PropTypes.func.isRequired,
+  showArchivedToggle:PropTypes.bool,
+  archiveCall: PropTypes.func.isRequired
+}
 
 export default Sidebar;

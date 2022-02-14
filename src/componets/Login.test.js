@@ -9,7 +9,7 @@ import {Tractor} from "@aircall/tractor";
 test('should show login form', () => {
     render(<MemoryRouter>
         <Tractor>
-            <Login/>
+            <Login setIsLoggedIn={jest.fn()}/>
         </Tractor>
     </MemoryRouter>)
 

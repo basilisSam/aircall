@@ -2,7 +2,7 @@ import {ArchiveOutlined, Avatar, Box, Flex, IconButton, InformationOutlined, Use
 import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 
-const Call = ({call, archiveCall}) => {
+const Call = ({call, updateCall}) => {
     return (
         <Box boxShadow={1} borderRadius={100} height='80px' width='500px' mb='15px'>
             <Flex justifyContent='center' alignItems='flex-end'>
@@ -17,7 +17,7 @@ const Call = ({call, archiveCall}) => {
                     />
                 </Link>
                 <IconButton
-                    onClick={() => archiveCall(call.id)}
+                    onClick={() => updateCall(call.id)}
                     size={32}
                     component={ArchiveOutlined}
                     color='red.base'
@@ -33,7 +33,7 @@ Call.propTypes = {
         created_at: PropTypes.string,
         id: PropTypes.string
     }),
-    archiveCall: PropTypes.func.isRequired
+    updateCall: PropTypes.func.isRequired
 }
 
 export default Call;
