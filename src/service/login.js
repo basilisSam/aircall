@@ -1,13 +1,13 @@
 import { LOGIN_URL } from "../constants";
 
-const login = (username, password, navigate) => {
-  fetch(LOGIN_URL, {
+const login = async (username, password, navigate) => {
+   await fetch(LOGIN_URL, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       username,
       password,
-    }),
+    })
   })
     .then((r) => r.json())
     .then((token) => {

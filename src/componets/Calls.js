@@ -1,7 +1,5 @@
 import Call from "./Call";
-import { Spacer } from "@aircall/tractor";
 import PropTypes from "prop-types";
-import CallNote from "./CallNote";
 
 const Calls = ({ calls, archiveCall }) => {
   return (
@@ -20,4 +18,5 @@ Calls.propTypes = {
   })),
   archiveCall: PropTypes.func.isRequired
 }
+
 export default Calls;

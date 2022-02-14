@@ -1,9 +1,8 @@
-import { Box, Spacer, Typography } from "@aircall/tractor";
-import { Accordion } from "@aircall/tractor/es/components/Accordion/Accordion";
-import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { CALLS_URL } from "../constants";
-import { getAuthorization } from "../service/login";
+import {Box, Spacer, Typography} from "@aircall/tractor";
+import {useEffect, useState} from "react";
+import {useNavigate, useParams} from "react-router-dom";
+import {CALLS_URL} from "../constants";
+import {getAuthorization} from "../service/login";
 import CallNote from "./CallNote";
 
 const CallDetails = () => {
@@ -36,7 +35,7 @@ const CallDetails = () => {
           navigate("/login");
         }
       });
-  }, []);
+  });
 
   return (
     <>

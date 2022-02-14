@@ -1,7 +1,6 @@
-import { Typography } from "@aircall/tractor";
+import {Typography} from "@aircall/tractor";
 import Calls from "./Calls";
 import PropTypes from "prop-types";
-import Sidebar from "./Sidebar";
 
 const GroupByDateCalls = ({ groupByDate, archiveCall }) => {
   return (

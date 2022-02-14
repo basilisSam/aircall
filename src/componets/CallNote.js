@@ -1,12 +1,12 @@
 import { Box, Spacer, Typography } from "@aircall/tractor";
-import PropTypes from "prop-types"; // ES6
+import PropTypes from 'prop-types'; // ES6
 
 const CallNote = ({ note }) => {
   return (
     <Box
       boxShadow={1}
       borderRadius={20}
-      
+
       height='80px'
       width='500px'
       mb='15px'
@@ -26,5 +26,12 @@ CallNote.propTypes = {
     id: PropTypes.string,
   }),
 };
+
+CallNote.propTypes = {
+  note: PropTypes.shape({
+    content: PropTypes.string,
+    id: PropTypes.string
+  })
+}
 
 export default CallNote;
