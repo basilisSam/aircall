@@ -33,7 +33,7 @@ You can run the tests of the application with `npm run test`
 
 You can build the application in production mode with `npm run build`
 
-> **Note:** You can use `npm` instead of `yarn`
+> **Note:** You can use `yarn` instead of `npm`
 
 ### Extra features implemented
 - [X] Login validation - when fields are empty
