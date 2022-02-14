@@ -22,15 +22,12 @@ For continuous integration and continuous deployment it uses [Netlify CI/CD](htt
 ### Available scripts
 
 #### Run app locally
-
 You can run the application locally by using `npm run start`.
 
 #### Test
-
 You can run the tests of the application with `npm run test`
 
 #### Test with watch
-
 You can run the tests of the application and enable watching for any updates with `npm run test:watch`
 
 #### Test with coverage
