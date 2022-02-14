@@ -29,11 +29,28 @@ You can run the application locally by using `npm run start`.
 
 You can run the tests of the application with `npm run test`
 
+#### Test with watch
+
+You can run the tests of the application and enable watching for any updates with `npm run test:watch`
+
+#### Test with coverage
+
+You can run the tests of the application and generate a coverage report with `npm run test:coverage`
+The report can be found in the `/coverage/` folder.
+
+#### Lint
+
+You can lint the project with `npm run lint`
+
+#### Lint with fix
+
+You can lint the project and attempt to fix issues with `npm run lint-fix`
+
 #### Build
 
 You can build the application in production mode with `npm run build`
 
-#### Build Production
+#### Build production
 
 You can build the application in production mode, run tests and lint the project with `npm run build:prod`
 
