@@ -11,8 +11,8 @@ import { Link } from "react-router-dom";
 
 const Call = ({ call, archiveCall }) => {
   return (
-    <Box boxShadow={1} borderRadius={100} height='80px' width='500px'>
-      <Flex justifyContent='center' alignItems='flex-end'>
+    <Box boxShadow={1} borderRadius={100} height='80px' width='500px' mb='15px'>
+      <Flex justifyContent='center' alignItems='flex-end' >
         <Avatar size='large' icon={<UserOutlined />} />
         {call.from}
         {call.created_at}

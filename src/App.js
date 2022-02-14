@@ -4,6 +4,8 @@ import CallDetails from "./componets/CallDetails";
 import Home from "./componets/Home";
 import Login from "./componets/Login";
 import Navbar from "./componets/NavBar";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
 function App() {
@@ -16,6 +18,15 @@ function App() {
           <Route path='login' element={<Login />} />
           <Route path='/calls/:id' element={<CallDetails />} />
         </Routes>
+        <ToastContainer
+          position='top-right'
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          theme='light'
+        />
       </Grid>
     </Tractor>
   );

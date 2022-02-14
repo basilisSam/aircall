@@ -9,7 +9,7 @@ const Sidebar = ({ groupByDateToggle, groupCallsByDate }) => {
           <Toggle
             size='small'
             checked={groupByDateToggle}
-            onChange={groupCallsByDate}
+            onChange={() => groupCallsByDate()}
           />
         </Spacer>
       </Box>

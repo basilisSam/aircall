@@ -1,14 +1,13 @@
 import Call from "./Call";
-import {Spacer} from "@aircall/tractor";
+import { Spacer } from "@aircall/tractor";
 
-const Calls = ({ calls,archiveCall}) => {
+const Calls = ({ calls, archiveCall }) => {
   return (
-      <Spacer space="s" direction="vertical" justifyItems="center">
-        {calls.map((call) => (
-            <Call archiveCall={archiveCall} key={call.id} call={call} />
-        ))}
-      </Spacer>
-
+      <>
+      {calls.map((call) => (
+        <Call  archiveCall={archiveCall} key={call.id} call={call} />
+      ))}
+    </>
   );
 };
 
