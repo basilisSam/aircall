@@ -36,6 +36,7 @@ You can run the tests of the application and enable watching for any updates wit
 #### Test with coverage
 
 You can run the tests of the application and generate a coverage report with `npm run test:coverage`
+
 The report can be found in the `/coverage/` folder.
 
 #### Lint
