@@ -11,7 +11,7 @@ import "./App.css";
 function App() {
   return (
     <Tractor>
-      <Grid gridTemplateRows='max-content 200px' gridGap={3}>
+      <Grid gridTemplateRows='max-content 200px'  gridGap={3} >
         <Navbar />
         <Routes>
           <Route path='/' element={<Home />} />

@@ -11,6 +11,11 @@ const CallDetails = () => {
   const { id } = useParams();
   const [callInfo, setCallInfo] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const [selectedItem, setSelectedItem] = useState(1);
+
+  const handleItemChange = (newSelectedItem) => {
+    setSelectedItem(newSelectedItem);
+  };
 
   useEffect(() => {
     fetch(CALLS_URL + id, {
@@ -37,36 +42,34 @@ const CallDetails = () => {
     <>
       {!isLoading ? (
         <>
-          <Box
-            size='150px'
-            width='500px'
-            bg='primary.lighter'
-            position='relative'
-          >
+          <Box size="320px" bg='grey.lighter' position='relative'>
             <Spacer space='m' direction='vertical' alignItems='start'>
               <Spacer space='s' direction='vertical'>
                 <Typography variant='body'>
-                  From : {callInfo.from}
-                  Direction: {callInfo.direction}
-                  To: {callInfo.to}
-                  Duration: {callInfo.duration}
-                  Archive:{callInfo.is_archive}
-                  Call Type: {callInfo.call_type}
-                  Via: {callInfo.via}
-                  Created At: {callInfo.created_at}
+                  <h3>From : {callInfo.from}</h3>
+                  <h3>To: {callInfo.to}</h3>
+                  <h3>Direction: {callInfo.direction}</h3>
+                  <h3>Duration: {callInfo.duration}</h3>
+                  <h3>Archive:{callInfo.is_archive}</h3>
+                  <h3>Via:{callInfo.via}</h3>
+                  <h3>Call Type: {callInfo.call_type}</h3>
+                  <h3>Created At: {callInfo.created_at}</h3>
                 </Typography>
               </Spacer>
             </Spacer>
-          </Box>
-
-          <Spacer space='s' direction='vertical' justifyItems='center'>
+          
+         
+          <Spacer space='s' direction='vertical' alignItems='start' mt={40}>
             {callInfo.notes.map((note) => (
               <CallNote key={note.id} note={note} />
             ))}
           </Spacer>
+          </Box>
         </>
       ) : (
+        <Spacer space='m' direction='vertical' alignItems='center'>
         <span className='loader' />
+        </Spacer>
       )}
     </>
   );

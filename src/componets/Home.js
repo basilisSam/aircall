@@ -7,15 +7,15 @@ import Calls from "./Calls";
 import Sidebar from "./Sidebar";
 import GroupByDateCalls from "./GroupByDateCalls";
 import { toast } from "react-toastify";
-import Pusher from 'pusher-js';
+import Pusher from "pusher-js";
 
 const Home = () => {
   const pusher = new Pusher("d44e3d910d38a928e0be", {
     cluster: "eu",
-    authEndpoint: 'https://frontend-test-api.aircall.io/pusher/auth',
+    authEndpoint: "https://frontend-test-api.aircall.io/pusher/auth",
     auth: {
-      headers: { Authorization: "Bearer " + sessionStorage.getItem("jwt") }
-    }
+      headers: { Authorization: "Bearer " + sessionStorage.getItem("jwt") },
+    },
   });
 
   const channel = pusher.subscribe("private-aircall");
@@ -95,12 +95,12 @@ const Home = () => {
   }, [groupByDateToggle]);
 
   return (
-    <Grid gridTemplateColumns='max-content auto' gridGap={2}>
+    <Grid gridTemplateColumns='max-content auto' gridGap={3}   >
       <Sidebar
         groupByDateToggle={groupByDateToggle}
         groupCallsByDate={groupCallsByDate}
       />
-      <Flex alignItems='center' justifyContent='center' p={3}>
+      <Flex alignItems='center' justifyContent='center' p={3} >
         {!isLoading ? (
           <Spacer space='s' direction='vertical' justifyItems='center'>
             {groupByDateToggle ? (
