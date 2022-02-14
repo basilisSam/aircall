@@ -1,4 +1,6 @@
 import { Box, Spacer, Toggle, Typography } from "@aircall/tractor";
+import PropTypes from "prop-types";
+import Calls from "./Calls";
 
 const Sidebar = ({ groupByDateToggle, groupCallsByDate }) => {
   return (
@@ -16,5 +18,10 @@ const Sidebar = ({ groupByDateToggle, groupCallsByDate }) => {
     </Spacer>
   );
 };
+
+Sidebar.propTypes = {
+    groupByDateToggle: PropTypes.bool,
+    groupCallsByDate: PropTypes.func.isRequired
+}
 
 export default Sidebar;

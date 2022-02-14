@@ -7,8 +7,23 @@ import Calls from "./Calls";
 import Sidebar from "./Sidebar";
 import GroupByDateCalls from "./GroupByDateCalls";
 import { toast } from "react-toastify";
+import Pusher from 'pusher-js';
 
 const Home = () => {
+  const pusher = new Pusher("d44e3d910d38a928e0be", {
+    cluster: "eu",
+    authEndpoint: 'https://frontend-test-api.aircall.io/pusher/auth',
+    auth: {
+      headers: { Authorization: "Bearer " + sessionStorage.getItem("jwt") }
+    }
+  });
+
+  const channel = pusher.subscribe("private-aircall");
+  channel.bind("update-call", (archivedCall) => {
+    setCalls(calls.filter((call) => call.id !== archivedCall.id));
+    setArchiveCalls([...archiveCalls, archivedCall]);
+  });
+
   const navigate = useNavigate();
   const [calls, setCalls] = useState({});
   const [archiveCalls, setArchiveCalls] = useState({});
