@@ -33,10 +33,6 @@ You can run the tests of the application with `npm run test`
 
 You can build the application in production mode with `npm run build`
 
-#### Build
-
-You can build the application in production mode with `npm run build`
-
 #### Build Production
 
 You can build the application in production mode, run tests and lint the project with `npm run build:prod`
