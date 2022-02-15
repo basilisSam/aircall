@@ -4,7 +4,6 @@
   "private": true,
   "dependencies": {
     "@aircall/tractor": "^1.16.1",
-    "@jest/globals": "^26.0.1",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
