@@ -1,6 +1,8 @@
 # Aircall [![Netlify Status](https://api.netlify.com/api/v1/badges/01bf1838-b94e-468f-b331-e5ccb5e60096/deploy-status)](https://app.netlify.com/sites/vasilis-aircall/deploys) [![Known Vulnerabilities](https://snyk.io/test/github/basilisSam/aircall/badge.svg)](https://snyk.io/test/github/basilisSam/aircall) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/fa90ffd43ad240d2bd823156d4b9ddc3)](https://www.codacy.com/gh/basilisSam/aircall/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=basilisSam/aircall&amp;utm_campaign=Badge_Grade)
 
-This is a project done for Aircall interview. Please find the instructions [here](https://github.com/basilisSam/aircall/wiki/Project-Instructions)
+This is a project done for Aircall interview. Please find the instructions [here](https://github.com/basilisSam/aircall/wiki/Project-Instructions).
+
+You can find the kanban board of this project [here](https://github.com/basilisSam/aircall/projects/1).
 
 ## Teck Stack
 
