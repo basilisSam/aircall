@@ -1,6 +1,5 @@
 import {
   ArchiveOutlined,
-  Avatar,
   Box,
   CallFilled,
   Flex,
@@ -8,7 +7,6 @@ import {
   InformationOutlined,
   Spacer,
   Typography,
-  UserOutlined,
 } from "@aircall/tractor";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
@@ -24,12 +22,6 @@ const Call = ({ call, updateCall }) => {
       display={"flex"}
     >
       <Flex justifyContent='center' alignItems='center'>
-        <IconButton
-          size={32}
-          pr={30}
-          component={CallFilled}
-          color='primary.base'
-        />
         <Spacer
           space='s'
           pr={30}

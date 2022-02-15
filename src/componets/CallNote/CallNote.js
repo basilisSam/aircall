@@ -5,7 +5,7 @@ const CallNote = ({ note }) => {
   return (
     <Box boxShadow={1} borderRadius={10} height='80px' width='500px'>
       <Spacer space='m' direction='vertical'>
-        <Typography variant='subheading2' weight='medium' alignSelf={"center"}>
+        <Typography p={2} textAlign={"left"}>
           {note.content}
         </Typography>
       </Spacer>
