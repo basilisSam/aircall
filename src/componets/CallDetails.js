@@ -1,8 +1,8 @@
-import {Box, Spacer, Typography} from "@aircall/tractor";
-import {useEffect, useState} from "react";
-import {useNavigate, useParams} from "react-router-dom";
-import {CALLS_URL} from "../constants";
-import {getAuthorization} from "../service/login";
+import { Box, Spacer, Typography } from "@aircall/tractor";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { CALLS_URL } from "../constants";
+import { getAuthorization } from "../service/login";
 import CallNote from "./CallNote";
 
 const CallDetails = () => {
@@ -36,33 +36,39 @@ const CallDetails = () => {
     <>
       {!isLoading ? (
         <>
-          <Box size="320px" bg='grey.lighter' position='relative'>
+          <Box size='320px' bg='grey.lighter' position='relative'>
             <Spacer space='m' direction='vertical' alignItems='start'>
               <Spacer space='s' direction='vertical'>
-                <Typography variant='body'>
-                  <h3>From : {callInfo.from}</h3>
-                  <h3>To: {callInfo.to}</h3>
-                  <h3>Direction: {callInfo.direction}</h3>
-                  <h3>Duration: {callInfo.duration}</h3>
-                  <h3>Archive:{callInfo.is_archive}</h3>
-                  <h3>Via:{callInfo.via}</h3>
-                  <h3>Call Type: {callInfo.call_type}</h3>
-                  <h3>Created At: {callInfo.created_at}</h3>
+                <Typography variant='Heading 02'>
+                  From : {callInfo.from}
+                </Typography>
+                <Typography variant='Heading 02'>To: {callInfo.to}</Typography>
+                <Typography variant='Heading 02'>
+                  Direction: {callInfo.direction}
+                </Typography>
+                <Typography variant='Heading 02'>
+                  Duration: {callInfo.duration/1000}
+                </Typography>
+                <Typography variant='Heading 02'>Via:{callInfo.via}</Typography>
+                <Typography variant='Heading 02'>
+                  Call Type: {callInfo.call_type}
+                </Typography>
+                <Typography variant='Heading 02'>
+                  Created At: {callInfo.created_at}
                 </Typography>
               </Spacer>
             </Spacer>
-          
-         
-          <Spacer space='s' direction='vertical' alignItems='start' mt={40}>
-            {callInfo.notes.map((note) => (
-              <CallNote key={note.id} note={note} />
-            ))}
-          </Spacer>
+
+            <Spacer space='s' direction='vertical' alignItems='center' pt={80}>
+              {callInfo.notes.map((note) => (
+                <CallNote key={note.id} note={note} />
+              ))}
+            </Spacer>
           </Box>
         </>
       ) : (
         <Spacer space='m' direction='vertical' alignItems='center'>
-        <span className='loader' />
+          <span className='loader' />
         </Spacer>
       )}
     </>

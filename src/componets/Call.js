@@ -3,7 +3,6 @@ import {
   Avatar,
   Box,
   CallFilled,
-  CallOutlined,
   Flex,
   IconButton,
   InformationOutlined,

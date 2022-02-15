@@ -4,10 +4,6 @@
   "private": true,
   "dependencies": {
     "@aircall/tractor": "^1.16.1",
-    "@testing-library/jest-dom": "^5.16.2",
-    "@testing-library/react": "^12.1.2",
-    "@testing-library/user-event": "^13.5.0",
-    "jest-fetch-mock": "^3.0.3",
     "prop-types": "^15.8.1",
     "pusher-js": "^7.0.6",
     "react": "^17.0.2",
@@ -48,10 +44,16 @@
   },
   "devDependencies": {
     "@babel/core": "^7.17.2",
+    "@testing-library/jest-dom": "^5.16.2",
+    "@testing-library/react": "^12.1.2",
+    "@testing-library/user-event": "^13.5.0",
+    "jest-fetch-mock": "^3.0.3",
+    "@jest/globals": "^26.0.1",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
     "babel-jest": "^27.5.1",
     "jest": "^27.5.1",
+    "eslint": "^8.9.0",
     "prettier": "2.5.1",
     "react-test-renderer": "^17.0.2"
   }
