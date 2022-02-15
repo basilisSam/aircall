@@ -1,29 +1,30 @@
-import { LOGIN_URL } from "../constants";
+import {LOGIN_URL} from "../constants";
+import {fetchWrapper} from "../api/fetchApi";
 
 const login = async (username, password, navigate) => {
-   await fetch(LOGIN_URL, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      username,
-      password,
+    fetchWrapper({
+        endpoint: LOGIN_URL,
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: {
+            username,
+            password,
+        }
     })
-  })
-    .then((r) => r.json())
-    .then((token) => {
-      sessionStorage.setItem("jwt", token.access_token);
-      sessionStorage.setItem("refreshToken", token.refresh_token);
-      navigate("/");
-    });
+        .then((token) => {
+            sessionStorage.setItem("jwt", token.access_token);
+            sessionStorage.setItem("refreshToken", token.refresh_token);
+            navigate("/");
+        });
 };
 
-const getAuthorization = () => {
-  return { Authorization: "Bearer " + sessionStorage.getItem("jwt") };
+const getAuthorizationToken = () => {
+    return "Bearer " + sessionStorage.getItem("jwt");
 };
 
 const logout = (navigate) => {
-  sessionStorage.clear();
-  navigate("/login");
+    sessionStorage.clear();
+    navigate("/Login");
 };
 
-export { login, logout, getAuthorization };
+export {login, logout, getAuthorizationToken};

@@ -1,9 +1,9 @@
 import {Grid, Tractor} from "@aircall/tractor";
 import {Route, Routes} from "react-router-dom";
-import CallDetails from "./componets/CallDetails";
-import Home from "./componets/Home";
-import Login from "./componets/Login";
-import Navbar from "./componets/NavBar";
+import CallDetails from "./componets/CallDetails/CallDetails";
+import Home from "./componets/Home/Home";
+import Login from "./componets/Login/Login";
+import Navbar from "./componets/Navbar/NavBar";
 import {ToastContainer} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";

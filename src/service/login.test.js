@@ -1,20 +1,41 @@
 import {
     jest, it, afterEach, expect, beforeEach
 } from '@jest/globals';
-import {getAuthorization, login, logout} from "./login";
+import {getAuthorizationToken, login, logout} from "./login";
+import * as fetchApi from "../api/fetchApi";
+import {CALLS_URL, LOGIN_URL} from "../constants";
 
-
-beforeEach(() => {
-    jest.spyOn(global, 'fetch').mockResolvedValue({
-        json: jest.fn().mockResolvedValue({access_token: "aToken", refresh_token: "aRefreshToken"})
-    })
-});
 
 afterEach(() => {
     jest.restoreAllMocks();
 });
 
+it('should send payload to login endpoint', async () => {
+    const fetchApiSpy = jest.spyOn(fetchApi, 'fetchWrapper').mockResolvedValue({
+        access_token: "aToken",
+        refresh_token: "aRefreshToken"
+    });
+
+    jest.spyOn(Object.getPrototypeOf(window.localStorage), 'setItem');
+
+    await login("someUsername", "somePassword", jest.fn());
+
+    expect(fetchApiSpy).toHaveBeenCalledWith({
+        endpoint: LOGIN_URL,
+        headers: {"Content-Type": "application/json"},
+        method: "POST",
+        body: {
+            username: "someUsername",
+            password: "somePassword"
+        },
+    });
+});
+
 it('should set access_token & refresh_token to the sessionStorage', async () => {
+    jest.spyOn(fetchApi, 'fetchWrapper').mockResolvedValue({
+        access_token: "aToken",
+        refresh_token: "aRefreshToken"
+    });
     jest.spyOn(Object.getPrototypeOf(window.localStorage), 'setItem');
 
     await login("someUsername", "somePassword", jest.fn());
@@ -32,7 +53,7 @@ it('should clear session storage', () => {
 
 it('should retrieve accessToken', () => {
     jest.spyOn(Object.getPrototypeOf(window.localStorage), 'getItem')
-    getAuthorization();
+    getAuthorizationToken();
     expect(sessionStorage.getItem).toHaveBeenCalledTimes(1);
     expect(sessionStorage.getItem).toHaveBeenCalledWith('jwt');
 });
