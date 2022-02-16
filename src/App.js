@@ -10,38 +10,38 @@ import "./App.css";
 import {useEffect, useState} from "react";
 
 function App() {
-  const [isLoggedIn,setIsLoggedIn] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  useEffect(() => {
-    const loggedInUser = sessionStorage.getItem("jwt");
-    if (loggedInUser) {
-      setIsLoggedIn(true)
-    }else{
-      setIsLoggedIn(false)
-    }
-  }, []);
+    useEffect(() => {
+        const loggedInUser = sessionStorage.getItem("jwt");
+        if (loggedInUser) {
+            setIsLoggedIn(true)
+        } else {
+            setIsLoggedIn(false)
+        }
+    }, []);
 
-  return (
-    <Tractor>
-      <Grid gridTemplateRows='max-content 200px' gridGap={3}>
-        <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='login' element={<Login setIsLoggedIn={setIsLoggedIn}/>} />
-          <Route path='/calls/:id' element={<CallDetails />} />
-        </Routes>
-        <ToastContainer
-          position='top-right'
-          autoClose={3000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          theme='light'
-        />
-      </Grid>
-    </Tractor>
-  );
+    return (
+        <Tractor>
+            <Grid gridTemplateRows='max-content 200px' gridGap={3}>
+                <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
+                <Routes>
+                    <Route path='/' element={<Home/>}/>
+                    <Route path='login' element={<Login setIsLoggedIn={setIsLoggedIn}/>}/>
+                    <Route path='/calls/:id' element={<CallDetails/>}/>
+                </Routes>
+                <ToastContainer
+                    position='top-right'
+                    autoClose={3000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    theme='light'
+                />
+            </Grid>
+        </Tractor>
+    );
 }
 
 export default App;

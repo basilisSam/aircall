@@ -22,8 +22,15 @@ import {
   EVENT_NAME,
   TOAST_DEFAULT_CONFIG,
 } from "../../constants";
+import Spinner from "../Spinner/Spinner";
 
 const Home = () => {
+  const pusher = new Pusher(APP_KEY, {
+    cluster: CLUSTER,
+    authEndpoint: AUTH_ENDPOINT,
+    auth: { headers: { Authorization: getAuthorizationToken() } },
+  });
+  const PAGE_SIZE = 3;
   const navigate = useNavigate();
   const [calls, setCalls] = useState({});
   const [archiveCalls, setArchiveCalls] = useState({});
@@ -32,18 +39,13 @@ const Home = () => {
   const [groupByDateToggle, setGroupByDateToggle] = useState(false);
   const [archivedToggle, setArchivedToggle] = useState(false);
 
-  const pusher = new Pusher(APP_KEY, {
-    cluster: CLUSTER,
-    authEndpoint: AUTH_ENDPOINT,
-    auth: { headers: { Authorization: getAuthorizationToken() } },
-  });
-  const channel = pusher.subscribe(CHANNEL_NAME);
-  channel.bind(EVENT_NAME, (archivedCall) => {
-    setCalls(calls.filter((Call) => Call.id !== archivedCall.id));
-    setArchiveCalls([...archiveCalls, archivedCall]);
-  });
-
   useEffect(() => {
+    const channel = pusher.subscribe(CHANNEL_NAME);
+    channel.bind(EVENT_NAME, (archivedCall) => {
+      // setCalls(calls.nodes.filter((call) => call.id !== archivedCall.id));
+      // setArchiveCalls([...archiveCalls, archivedCall]);
+    });
+
     getAllCalls()
       .then((calls) => {
         setCalls(calls.nodes.filter((call) => call.is_archived === false));
@@ -59,6 +61,11 @@ const Home = () => {
       });
 
     updateGroupCallsByDate();
+
+    return () => {
+      channel.unbind(EVENT_NAME);
+      pusher.unsubscribe(CHANNEL_NAME);
+    };
   }, [groupByDateToggle]);
 
   const handleUpdateCall = (id) => {
@@ -99,15 +106,12 @@ const Home = () => {
               enablePagination={false}
               updateCall={handleUpdateCall}
               calls={archiveCalls}
+              itemsPerPage={2}
             />
           </>
         )}
       </>
     );
-  };
-
-  const renderSpinner = () => {
-    return <span className='loader' />;
   };
 
   return (
@@ -131,14 +135,14 @@ const Home = () => {
                 enablePagination={true}
                 updateCall={handleUpdateCall}
                 calls={calls}
-                itemsPerPage={3}
+                itemsPerPage={PAGE_SIZE}
               />
             )}
 
             {renderArchivedIfEnabled()}
           </Spacer>
         ) : (
-          renderSpinner()
+          <Spinner />
         )}
       </Flex>
     </Grid>
