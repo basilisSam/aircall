@@ -2,7 +2,7 @@ import Call from "../Call/Call";
 import PropTypes from "prop-types";
 import ReactPaginate from "react-paginate";
 import { useEffect, useState } from "react";
-import { Box, Flex, Spacer } from "@aircall/tractor";
+import { Box, Spacer } from "@aircall/tractor";
 
 const Calls = ({ calls, updateCall, itemsPerPage, enablePagination }) => {
   const [currentItems, setCurrentItems] = useState(calls);
@@ -27,9 +27,13 @@ const Calls = ({ calls, updateCall, itemsPerPage, enablePagination }) => {
           {currentItems.map((call) => (
             <Call updateCall={updateCall} key={call.id} call={call} />
           ))}
-          <Box width="350px" mx="auto">
-          <Spacer space="xs" fluid alignItems={"center"} justifyContent={"center"}>
-            
+          <Box width='350px' mx='auto'>
+            <Spacer
+              space='xs'
+              fluid
+              alignItems={"center"}
+              justifyContent={"center"}
+            >
               <ReactPaginate
                 nextLabel='next >'
                 onPageChange={handlePageClick}
@@ -50,8 +54,7 @@ const Calls = ({ calls, updateCall, itemsPerPage, enablePagination }) => {
                 activeClassName='active'
                 renderOnZeroPageCount={null}
               />
-           
-          </Spacer>
+            </Spacer>
           </Box>
         </>
       ) : (

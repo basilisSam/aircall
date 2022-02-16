@@ -1,4 +1,21 @@
-import { Box, Spacer, Typography } from "@aircall/tractor";
+import {
+  ArchiveFilled,
+  AssignedOutlined,
+  Box,
+  CalendarOutlined,
+  CallFilled,
+  CallInboundFilled,
+  CallOutboundFilled,
+  CallOutlined,
+  ClockFilled,
+  ClockOutlined,
+  ContactsOutlined,
+  NotesFilled,
+  OverviewOutlined,
+  Spacer,
+  Typography,
+  UserOutlined,
+} from "@aircall/tractor";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import CallNote from "../CallNote/CallNote";
@@ -22,7 +39,9 @@ const CallDetails = () => {
         }
       });
   });
-
+  const durationInHours = callInfo.duration / 3600;
+  const durationInMinutes = callInfo.duration / 60;
+  const callDate = callInfo.created_at;
   return (
     <>
       {!isLoading ? (
@@ -30,7 +49,7 @@ const CallDetails = () => {
           <Box
             boxShadow={1}
             borderRadius={10}
-            height='350px'
+            height='380px'
             width='350px'
             ml={3}
           >
@@ -38,35 +57,64 @@ const CallDetails = () => {
               <Spacer space='s' direction='vertical'>
                 <Typography variant='subheading2'>
                   <p>
-                    <b>From: </b>
+                    <b>
+                      <AssignedOutlined alignmentBaseline='central' /> From:{" "}
+                    </b>
                     {callInfo.from}
                   </p>
                   <p>
-                    <b>To: </b>
+                    <b>
+                      <UserOutlined alignmentBaseline='central' /> To:{" "}
+                    </b>
                     {callInfo.to}
                   </p>
                   <p>
-                    <b>Direction: </b>
+                    <b>
+                      {callInfo.direction === "inbound" ? (
+                        <CallInboundFilled alignmentBaseline='central' />
+                      ) : (
+                        <CallOutboundFilled alignmentBaseline='central' />
+                      )}{" "}
+                      Direction:{" "}
+                    </b>
                     {callInfo.direction}
                   </p>
                   <p>
-                    <b>Duration: </b>
-                    {callInfo.duration / 3600}h
+                    <b>
+                      <OverviewOutlined alignmentBaseline='central' /> Duration:{" "}
+                    </b>
+                    {durationInHours >= 1
+                      ? `${durationInHours.toFixed(2)}h`
+                      : `${durationInMinutes.toFixed(2)}m`}
                   </p>
                   <p>
-                    <b>Via: </b>
+                    <b>
+                      <ContactsOutlined alignmentBaseline='central' /> Via:{" "}
+                    </b>
                     {callInfo.via}
                   </p>
                   <p>
-                    <b>Created at: </b>
-                    {callInfo.created_at}
+                    <b>
+                      <CalendarOutlined alignmentBaseline='central' /> Date:{" "}
+                    </b>
+                    {callDate.substring(0, 10)}
                   </p>
                   <p>
-                    <b>Call type: </b>
+                    <b>
+                      <ClockFilled alignmentBaseline='central' /> Time:{" "}
+                    </b>
+                    {callDate.substring(11, 19)}h
+                  </p>
+                  <p>
+                    <b>
+                      <CallFilled alignmentBaseline='central' /> Call type:{" "}
+                    </b>
                     {callInfo.call_type}
                   </p>
                   <p>
-                    <b>Status: </b>
+                    <b>
+                      <ArchiveFilled alignmentBaseline='central' /> Status:{" "}
+                    </b>
                     {callInfo.is_archived ? "Archived" : "Not Archived"}
                   </p>
                 </Typography>
@@ -74,7 +122,7 @@ const CallDetails = () => {
             </Spacer>
             {callInfo.notes.length > 0 && (
               <Typography mb={2} textAlign={"left"} variant='subheading'>
-                Notes
+                Notes <NotesFilled alignmentBaseline='central' />
               </Typography>
             )}
             <Spacer space='s' direction='vertical' alignItems='center'>

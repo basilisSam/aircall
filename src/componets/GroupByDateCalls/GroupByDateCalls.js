@@ -7,7 +7,7 @@ const GroupByDateCalls = ({ groupByDate, updateCall }) => {
     <>
       {Object.keys(groupByDate).map((date) => (
         <div key={date}>
-        <Typography mb="4px" textAlign="center" variant="heading2">{date} </Typography>
+        <Typography mb="4px" textAlign="center" variant="heading">{date} </Typography>
           <Calls
               enablePagination={false}
             updateCall={updateCall}

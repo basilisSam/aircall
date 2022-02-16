@@ -99,7 +99,6 @@ const Home = () => {
               enablePagination={false}
               updateCall={handleUpdateCall}
               calls={archiveCalls}
-              itemsPerPage={2}
             />
           </>
         )}
@@ -132,7 +131,7 @@ const Home = () => {
                 enablePagination={true}
                 updateCall={handleUpdateCall}
                 calls={calls}
-                itemsPerPage={2}
+                itemsPerPage={3}
               />
             )}
 
