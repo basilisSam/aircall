@@ -6,6 +6,7 @@ import {
   getAllCalls,
   getCallInfo,
   updateCall,
+  updateCalls,
 } from "./calls";
 
 let fetchApiSpy;
@@ -62,4 +63,28 @@ it("should group calls by date", async () => {
 
   const groups = generateGroupsByDate(calls);
   expect(groups).toStrictEqual(expectedGroups);
+});
+
+it("should remove archive call from calls", async () => {
+  const calls = [{ id: 1 }, { id: 2 }, { id: 3 }];
+  const callUpdated = {
+    id: 1,
+    is_archived: true,
+  };
+
+  const newCalls = updateCalls(calls, callUpdated);
+  expect(newCalls).toHaveLength(calls.length - 1);
+  expect(newCalls).toEqual([{ id: 2 }, { id: 3 }]);
+});
+
+it("should a call to the array if is not archive", async () => {
+  const calls = [{ id: 1 }, { id: 2 }, { id: 3 }];
+  const callUpdated = {
+    id: 1,
+    is_archived: false,
+  };
+
+  const newCalls = updateCalls(calls, callUpdated);
+  expect(newCalls).toHaveLength(calls.length + 1);
+  expect(newCalls).toContain(callUpdated);
 });

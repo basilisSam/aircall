@@ -22,6 +22,7 @@ const Sidebar = ({
         <Typography variant='body'>Show archived</Typography>
         <Toggle
           size='small'
+          data-testid='showArchiveToggleId'
           checked={showArchivedToggle}
           onChange={() => showArchived()}
         />
