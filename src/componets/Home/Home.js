@@ -30,8 +30,10 @@ const Home = () => {
     authEndpoint: AUTH_ENDPOINT,
     auth: { headers: { Authorization: getAuthorizationToken() } },
   });
+
   const PAGE_SIZE = 3;
   const navigate = useNavigate();
+
   const [calls, setCalls] = useState({});
   const [archiveCalls, setArchiveCalls] = useState({});
   const [groupByDate, setGroupByDate] = useState({});
@@ -42,8 +44,7 @@ const Home = () => {
   useEffect(() => {
     const channel = pusher.subscribe(CHANNEL_NAME);
     channel.bind(EVENT_NAME, (archivedCall) => {
-      // setCalls(calls.nodes.filter((call) => call.id !== archivedCall.id));
-      // setArchiveCalls([...archiveCalls, archivedCall]);
+      // For some reason calls are not updated when an event happens
     });
 
     getAllCalls()
