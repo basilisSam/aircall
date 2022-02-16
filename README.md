@@ -21,6 +21,8 @@ For continuous integration and continuous deployment it uses [Netlify CI/CD](htt
 1. Run the application locally (the application can be accessed from [localhost:3000](http://localhost:3000/)) <br/>
    `$ npm run start`
 
+1. Login by inserting a text to both username & password fields (as long as you enter something login will be successful) <br/>
+
 ### Available scripts
 
 #### Run app locally
