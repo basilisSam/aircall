@@ -12,6 +12,7 @@ const generateGroupsByDate = (calls) => {
     }, {});
 }
 
+
 const updateCalls = (calls, callUpdated) => {
     return callUpdated.is_archived ?
         calls.filter((call) => call.id !== callUpdated.id) :
