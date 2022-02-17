@@ -10,6 +10,8 @@ The project is build with [React](https://reactjs.org/). It uses [jest](https://
 
 For continuous integration and continuous deployment it uses [Netlify CI/CD](https://www.netlify.com/). The project has been deployed here: https://vasilis-aircall.netlify.app/
 
+The project is also using [Snyk](https://snyk.io/) for security vulnerabilities, and [Codacy](https://www.codacy.com/) for code static analysis.
+
 ### Run it locally
 
 1. Clone the project on your local machine. <br/>
